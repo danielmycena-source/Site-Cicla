@@ -1,0 +1,6 @@
+{
+  "name": "Cicla · Daniel Carvalho",
+  "description": "Projetos que aproximam empresas, municípios e organizações de catadores para fortalecer a cadeia da reciclagem.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
