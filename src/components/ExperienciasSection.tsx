@@ -1,113 +1,116 @@
 import React from 'react';
-import { experienciasDocumentadas, brandPalette, contactData } from '../data/ciclaData';
-import { FileText, Calendar, Check, ArrowRight, MessageCircle, ExternalLink, Award } from 'lucide-react';
+import { caseStudies, contactData } from '../data/ciclaReformedData';
+import { Building2, Factory, Award, MessageCircle, FileText } from 'lucide-react';
 
 export const ExperienciasSection: React.FC = () => {
   return (
-    <section id="experiencias" className="py-20 md:py-28 bg-[#F8F9FA] text-[#575756]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        {/* Cabeçalho da Seção */}
+    <section id="experiencias" className="py-20 md:py-28 bg-[#F8F9FA] text-[#575756] border-t border-slate-200/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Cabeçalho */}
         <div className="max-w-3xl mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#311853]/5 border border-[#311853]/10 text-[#311853] text-xs font-semibold uppercase tracking-wider mb-4">
-            Histórico & Repertório
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#311853]/5 border border-[#311853]/10 text-[#311853] text-xs font-bold uppercase tracking-wider mb-3">
+            <Award className="w-3.5 h-3.5 text-[#9AC31C]" />
+            <span>Cases de Sucesso & Trajetória Comprovada</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#311853] tracking-tight mb-4">
-            Experiências Documentadas
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#311853] tracking-tight mb-3">
+            Casos Reais que Transformaram a Reciclagem no Brasil
           </h2>
-          <p className="text-base sm:text-lg text-[#575756] leading-relaxed">
-            Iniciativas e metodologias desenvolvidas pela Cicla com respaldo em documentos institucionais, contextualização cronológica e escopo verificado.
+          <p className="text-base text-slate-600 leading-relaxed">
+            A Cicla atua exclusivamente no desenho de <strong>programas de coleta seletiva municipal</strong>, na <strong>estruturação e fortalecimento institucional de organizações de catadores</strong> e na <strong>gestão e monitoramento de investimentos privados</strong> com impacto social e ambiental mensurável.
           </p>
         </div>
 
-        {/* Grid das 4 Experiências Documentadas */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-14">
-          {experienciasDocumentadas.map((exp, idx) => (
-            <article
-              key={exp.id}
-              id={`experiencia-card-${exp.id}`}
-              className="bg-white rounded-2xl border border-slate-200/90 p-7 sm:p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group relative overflow-hidden"
-            >
-              {/* Barra superior de acento com a cor correspondente */}
-              <div
-                className="absolute top-0 left-0 right-0 h-1.5"
-                style={{ backgroundColor: exp.accentColor }}
-              />
+        {/* Grid dos 3 Casos Obrigatórios */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-14">
+          {caseStudies.map((item) => {
+            const isPref = item.category === 'Prefeituras';
+            const accentColor = isPref ? (item.id === 'case-sp-coopera' ? '#41B6C0' : '#311853') : '#E5006B';
+            const Icon = isPref ? Building2 : Factory;
 
-              <div>
-                {/* Metadados: Frente e Período */}
-                <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                  <span
-                    className="text-xs font-bold px-3 py-1 rounded-full"
-                    style={{
-                      backgroundColor: `${exp.accentColor}18`,
-                      color: exp.accentColor,
-                    }}
-                  >
-                    {exp.frenteLabel}
-                  </span>
+            return (
+              <article
+                key={item.id}
+                className="bg-white rounded-3xl border border-slate-200/90 p-7 sm:p-8 shadow-sm hover:shadow-md transition-all flex flex-col justify-between relative overflow-hidden group"
+              >
+                <div
+                  className="absolute top-0 left-0 right-0 h-2"
+                  style={{ backgroundColor: accentColor }}
+                />
 
-                  {exp.referenceDocument.period && (
-                    <span className="inline-flex items-center gap-1.5 text-xs text-[#575756]/80 font-medium">
-                      <Calendar className="w-3.5 h-3.5 text-[#311853]" />
-                      <span>{exp.referenceDocument.period}</span>
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-4">
+                    <span
+                      className="inline-flex items-center gap-1.5 text-xs font-extrabold px-3 py-1 rounded-full"
+                      style={{
+                        backgroundColor: `${accentColor}18`,
+                        color: accentColor,
+                      }}
+                    >
+                      <Icon className="w-3.5 h-3.5" />
+                      <span>{item.category}</span>
                     </span>
-                  )}
-                </div>
+                    <span className="text-[11px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                      Case Real
+                    </span>
+                  </div>
 
-                {/* Título do Projeto */}
-                <h3 className="text-xl font-bold text-[#311853] mb-3 group-hover:text-[#311853] transition-colors">
-                  {exp.title}
-                </h3>
+                  <h3 className="text-lg font-bold text-[#311853] mb-2 leading-snug">
+                    {item.title}
+                  </h3>
 
-                {/* Síntese */}
-                <p className="text-sm font-semibold text-[#575756] mb-4 leading-relaxed">
-                  {exp.summary}
-                </p>
+                  <p className="text-xs font-semibold text-slate-500 mb-5">
+                    {item.locationOrClient}
+                  </p>
 
-                {/* Contexto Documentado */}
-                <p className="text-xs sm:text-sm text-[#575756]/90 mb-5 leading-relaxed bg-slate-50 p-3.5 rounded-xl border border-slate-100">
-                  {exp.documentedContext}
-                </p>
-
-                {/* Ações e Contribuições Descritas */}
-                <div className="space-y-2.5 mb-6">
-                  <h4 className="text-xs font-bold text-[#311853] uppercase tracking-wider">
-                    Contribuições Documentadas
-                  </h4>
-                  {exp.keyContributions.map((contrib, cIdx) => (
-                    <div key={cIdx} className="flex items-start gap-2 text-xs sm:text-sm text-[#575756]">
-                      <span
-                        className="w-1.5 h-1.5 rounded-full shrink-0 mt-2"
-                        style={{ backgroundColor: exp.accentColor }}
-                      />
-                      <span className="leading-relaxed">{contrib}</span>
+                  <div className="space-y-3 text-xs leading-relaxed text-slate-600 mb-6">
+                    <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                      <strong className="text-[#311853] block mb-1">Contexto & Desafio:</strong>
+                      {item.challenge}
                     </div>
-                  ))}
-                </div>
-              </div>
 
-              {/* Rodapé do Card: Fonte de Referência Documental */}
-              <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-[#575756]/75">
-                <span className="inline-flex items-center gap-1.5">
-                  <FileText className="w-3.5 h-3.5 text-[#311853]/70" />
-                  <span>
-                    Fonte: <strong className="text-[#311853] font-semibold">{exp.referenceDocument.source}</strong> ({exp.referenceDocument.page})
+                    <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                      <strong className="text-[#311853] block mb-1">Atuação Técnica da Cicla:</strong>
+                      {item.actionTaken}
+                    </div>
+
+                    <div 
+                      className="p-3.5 rounded-xl border font-medium"
+                      style={{
+                        backgroundColor: `${accentColor}10`,
+                        borderColor: `${accentColor}30`,
+                        color: '#311853',
+                      }}
+                    >
+                      <strong className="block mb-1 text-[#311853] font-bold">
+                        Impacto e Resultado Atingido:
+                      </strong>
+                      {item.impactResult}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                  <span className="inline-flex items-center gap-1.5">
+                    <FileText className="w-3.5 h-3.5 text-[#311853]" />
+                    <span>{item.verifiedReference}</span>
                   </span>
-                </span>
-              </div>
-            </article>
-          ))}
+                </div>
+              </article>
+            );
+          })}
         </div>
 
-        {/* Nota Metodológica e Transparência */}
-        <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+        {/* Banner de Posicionamento Claro */}
+        <div className="bg-[#311853] text-white rounded-3xl p-8 sm:p-10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 border border-white/10">
           <div className="max-w-2xl">
-            <h4 className="text-sm font-bold text-[#311853] mb-1 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#9AC31C]" />
-              Transparência & Escopo Documental
-            </h4>
-            <p className="text-xs sm:text-sm text-[#575756] leading-relaxed">
-              Os registros acima refletem iniciativas documentadas nos relatórios institucionais da Cicla (2017 a 2022). Em respeito à integridade da informação, métricas históricas são apresentadas em seus recortes originais sem agregações descontextualizadas.
+            <span className="text-xs font-extrabold uppercase tracking-widest text-[#9AC31C] block mb-1">
+              Foco & Escopo Técnico Especializado
+            </span>
+            <h3 className="text-xl sm:text-2xl font-bold mb-2">
+              Inteligência técnica, governança e viabilidade para quem quer fazer acontecer.
+            </h3>
+            <p className="text-xs sm:text-sm text-white/80 leading-relaxed">
+              Não realizamos operação de transporte ou frete de logística reversa. Nosso papel é a estruturação qualificada: planos municipais de coleta seletiva, gestão e monitoramento de investimentos privados e fortalecimento institucional para que as cooperativas operem com protagonismo e autonomia.
             </p>
           </div>
 
@@ -115,10 +118,10 @@ export const ExperienciasSection: React.FC = () => {
             href={contactData.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold bg-[#311853] hover:bg-[#24113E] text-white px-5 py-3 rounded-xl transition-all shrink-0 active:scale-95"
+            className="shrink-0 inline-flex items-center gap-2 bg-[#9AC31C] hover:bg-[#86aa18] text-[#311853] font-extrabold text-sm sm:text-base px-6 py-3.5 rounded-xl shadow transition-all"
           >
-            <MessageCircle className="w-4 h-4 text-[#9AC31C] fill-current" />
-            <span>Conversar sobre novos projetos</span>
+            <MessageCircle className="w-4 h-4 fill-current" />
+            <span>Falar sobre seu projeto</span>
           </a>
         </div>
       </div>

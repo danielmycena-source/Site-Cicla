@@ -42,4 +42,6 @@ export interface ContactInfo {
   whatsappUrl: string;
   emailUrl: string;
   phoneUrl: string;
+  linkedinDanielUrl: string;
+  linkedinCompanyUrl: string;
 }

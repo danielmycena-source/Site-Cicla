@@ -8,6 +8,8 @@ export const contactData: ContactInfo = {
   whatsappUrl: 'https://wa.me/5511970340808?text=Ol%C3%A1%20Daniel%2C%20visitei%20o%20site%20da%20Cicla%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto.',
   emailUrl: 'mailto:daniel@ciclabrasil.com.br?subject=Contato%20via%20Site%20Cicla%20-%20Projeto',
   phoneUrl: 'tel:+5511970340808',
+  linkedinDanielUrl: 'https://www.linkedin.com/in/daniel-cicla',
+  linkedinCompanyUrl: 'https://www.linkedin.com/company/cicla-brasil/',
 };
 
 export const brandPalette = {
